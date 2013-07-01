@@ -12,13 +12,19 @@ Requirements
  * [python-mpd](http://jatreuman.indefero.net/p/python-mpd/)
   * python-mpd in Debian.
 
+Installation
+------------
+
+Clone this repository and install as follows:
+ * `python setup.py install --user`
+
 Configuration
 -------------
 
 The following configuration options are recognised:
- * MPD_HOST: The IP address or hostname of your MPD instance
- * MPD_PORT: The port that your MPD instance is listening on
- * MPD_PASS: The password required to connect to your MPD instance.
+ * `MPD_HOST`: The IP address or hostname of your MPD instance
+ * `MPD_PORT`: The port that your MPD instance is listening on
+ * `MPD_PASS`: The password required to connect to your MPD instance.
 
 These configuration options should be located in your Flask app configuration.
 
