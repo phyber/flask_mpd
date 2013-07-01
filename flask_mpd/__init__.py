@@ -76,7 +76,6 @@ class MPC(object):
 		Disconnect from MPD.
 		"""
 		ctx.mpd_client.disconnect()
-		self._client = None
 
 	def execute(self, func_name, args=None):
 		"""
