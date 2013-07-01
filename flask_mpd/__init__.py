@@ -20,7 +20,7 @@ VALID_COMMANDS = (
 		'status',
 		)
 
-class MPC(object):
+class MPD(object):
 	"""
 	MPD client class.
 
@@ -61,21 +61,16 @@ class MPC(object):
 				'port': current_app.config['MPD_PORT'],
 				}
 		client = mpd.MPDClient()
-		return client.connect(**conn_info)
-
-	@property
-	def connection(self):
-		ctx = stack.top
-		if ctx is not None:
-			if not hasattr(ctx, 'mpd_client'):
-				ctx.mpd_client = self.connect()
-			return ctx.mpd_client
+		client.connect(**conn_info)
+		return client
 
 	def disconnect(self):
 		"""
 		Disconnect from MPD.
 		"""
-		ctx.mpd_client.disconnect()
+		ctx = stack.top
+		if hasattr(ctx, 'mpd_client'):
+			ctx.mpd_client.disconnect()
 
 	def execute(self, func_name, args=None):
 		"""
