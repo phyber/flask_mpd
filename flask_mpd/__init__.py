@@ -117,10 +117,8 @@ class MPD(object):
 
 	def idle(self):
 		for subsystem in self.execute('idle'):
-			result = []
-			for handler in IDLE_HANDLERS.get(subsystem, ()):
-				handler_result = self.execute(handler)
-				result.append({
-					subsystem: handler_result
-					})
+			result = {subsystem: {}}
+			for func_name in IDLE_HANDLERS.get(subsystem, ()):
+				func_result = self.execute(func_name)
+				result[subsystem][func_name] = func_result
 			return result
