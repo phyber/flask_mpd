@@ -15,6 +15,7 @@ VALID_COMMANDS = (
 		'play',
 		# Info commands
 		'currentsong',
+		'idle',
 		'playlistinfo',
 		'stats',
 		'status',
