@@ -123,4 +123,4 @@ class MPD(object):
 				result.append({
 					subsystem: handler_result
 					})
-			return ret
+			return result
