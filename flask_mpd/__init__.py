@@ -21,6 +21,13 @@ VALID_COMMANDS = (
 		'status',
 		)
 
+IDLE_HANDLERS = {
+		'player': (
+			'currentsong',
+			'status',
+			),
+		}
+
 class MPD(object):
 	"""
 	MPD client class.
@@ -107,3 +114,10 @@ class MPD(object):
 				raise
 		else:
 			raise InvalidCommand("Invalid command: '{}'".format(func_name))
+
+	def idle(self):
+		for subsystem in self.execute('idle'):
+			ret = {}
+			for handler in IDLE_HANDLERS.get(subsystem, ()):
+				ret[handler] = self.execute(handler)
+			return ret
