@@ -26,6 +26,9 @@ IDLE_HANDLERS = {
 			'currentsong',
 			'status',
 			),
+		'playlist': (
+			'playlistinfo',
+			),
 		}
 
 class MPD(object):
