@@ -118,10 +118,22 @@ class MPD(object):
         else:
             raise InvalidCommand("Invalid command: '{}'".format(func_name))
 
-    def idle(self):
+    def idle(self, strip_dict_keys=None):
+        """Executes the MPD idle command.
+
+        Arguments: strip_dict_keys={command: [a, b, c], ...}
+        """
         for subsystem in self.execute('idle'):
             result = {'idle': subsystem, 'info': {}}
             for func_name in IDLE_HANDLERS.get(subsystem, ()):
                 func_result = self.execute(func_name)
+                # Attempt to strip any listed keys.
+                try:
+                    for key in strip_dict_keys[func_name]:
+                        del func_result[key]
+                except KeyError:
+                    pass
+                except TypeError:
+                    pass
                 result['info'][func_name] = func_result
             return result
